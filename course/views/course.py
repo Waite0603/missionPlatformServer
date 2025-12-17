@@ -135,6 +135,30 @@ def update_course(request):
 
 @get_only
 @login_required
+# 更改课程会员状态
+def change_course_status(request):
+  course_id = request.GET.get('id')
+
+  if not all([course_id]):
+    return ResponseInfo.fail(400, '参数不全')
+
+  # 查看课程是否存在
+  course_data = Course.objects.filter(id=course_id).first()
+
+  if not course_data:
+    return ResponseInfo.fail(404, '课程不存在')
+
+  # 如果课程状态为1, 则更改为2
+  if course_data.status == 1:
+    Course.objects.filter(id=course_id).update(status=2)
+  else:
+    Course.objects.filter(id=course_id).update(status=1)
+
+  return ResponseInfo.success('更改成功')
+
+
+@get_only
+@login_required
 def delete_course(request):
   course_id = request.GET.get('id')
 
@@ -220,7 +244,8 @@ def recommend_course(request):
   category = course_data.category
 
   # 获取推荐课程, 前四条, status!=0
-  recommend_course_list = Course.objects.filter(category=category, status__gt=0).exclude(id=id).order_by('-create_time')[:4]
+  recommend_course_list = Course.objects.filter(category=category, status__gt=0).exclude(id=id).order_by(
+    '-create_time')[:4]
 
   recommend_course_list = [
     model_to_dict(course) for course in recommend_course_list

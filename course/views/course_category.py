@@ -120,3 +120,5 @@ def delete_category(request):
   ]
 
   return ResponseInfo.success('删除成功', data=category_list)
+
+# 上傳視頻文件

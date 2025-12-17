@@ -265,6 +265,23 @@ def contact_us(request):
   return ResponseInfo.success('提交成功, 我们会尽快联系您')
 
 
+# 获取所有反馈
+@get_only
+@login_required
+def get_feedback(request):
+  user_data = get_user_info(request)
+
+  user_data = UserProfileModel.objects.filter(id=user_data.id).first()
+
+  feedback_data = Contact.objects.all().values()
+
+  feedback_list = [
+    model_to_dict(feedback) for feedback in feedback_data
+  ]
+
+  return ResponseInfo.success('获取成功', feedback_list)
+
+
 # 开通会员
 @post_only
 @login_required

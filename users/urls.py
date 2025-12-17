@@ -16,6 +16,7 @@ urlpatterns = [
   re_path(r'^logout/?$', v.logout, name='logout'),
   re_path(r'^captcha/?$', v.get_verify_code, name='get_verify_code'),
   re_path(r'^contact/?$', v.contact_us, name='contact_us'),
+  re_path(r'^contact/list/?$', v.get_feedback, name='get_feedback'),
   re_path(r'^avatar/upload/?$', v.upload_avatar, name='upload_avatar'),
   re_path(r'^avatar/preview/?$', v.preview_avatar, name='preview_avatar'),
   re_path(r'^vip/open/?$', v.open_vip, name='open_vip'),

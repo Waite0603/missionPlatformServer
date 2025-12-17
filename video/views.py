@@ -58,7 +58,7 @@ def upload_video(request):
 
   # 保存上传记录
   upload_record = UploadRecord.objects.create(
-    name=file_obj.name,
+    name=file_name,
     path=f'{upload_dir}/{file_name}',
     size=video_size,
     format=video_type,

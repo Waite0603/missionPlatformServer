@@ -21,6 +21,7 @@ urlpatterns = [
   re_path(r'^create/?$', course.create_course, name='create_course'),
   re_path(r'^list/?$', course.get_course_list, name='get_course_list'),
   re_path(r'^update/?$', course.update_course, name='update_course'),
+  re_path(r'^change/status/?$', course.change_course_status, name='update_course_status'),
   re_path(r'^delete/?$', course.delete_course, name='delete_course'),
   re_path(r'^upload/cover/?$', course.upload_cover, name='upload_cover'),
   re_path(r'^cover/(?P<cover_url>.+)$', course.preview_cover, name='get_cover'),
